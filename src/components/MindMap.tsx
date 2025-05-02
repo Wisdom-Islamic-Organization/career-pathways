@@ -74,7 +74,7 @@ const MindMap: React.FC = () => {
       .attr("class", d => `node ${d.children ? "node--internal" : "node--leaf"}`)
       .attr("transform", d => `translate(${d.y || 0}, ${d.x || 0})`)
       .style("cursor", "pointer")
-      .on("click", (event, d) => {
+      .on("click", (_event, d) => {
         if (d.data.id) {
           // If it's a domain node
           if (!d.data.domain) {

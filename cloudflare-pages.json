@@ -1,0 +1,17 @@
+{
+  "build": {
+    "command": "npm run build",
+    "output_directory": "dist",
+    "root_directory": ""
+  },
+  "compatibility_flags": [],
+  "compatibility_date": "2023-11-12",
+  "env_vars": {},
+  "routes": [
+    {
+      "pattern": "/*",
+      "script": null,
+      "custom_domain": false
+    }
+  ]
+} 
