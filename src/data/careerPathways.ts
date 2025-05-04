@@ -292,7 +292,83 @@ export const careerPathwaysData = {
       "id": "medicine",
       "name": "Medicine",
       "description": "Explore careers in healthcare and medical fields that focus on human health and wellbeing.",
-      "subdomains": []
+      "subdomains": [
+        {
+          "id": "mbbs",
+          "name": "MBBS and Beyond",
+          "description": "Pathways after MBBS including clinical practice, specialization, and public health.",
+          "careerOptions": [
+            "Clinical Practitioner",
+            "Government Medical Officer",
+            "Medical Researcher",
+            "Medical Educator",
+            "Clinical Research Analyst",
+            "Medical Content Writer"
+          ],
+          "educationPath": {
+            "undergraduate": {
+              "name": "MBBS (Bachelor of Medicine and Bachelor of Surgery)",
+              "duration": "5.5 years",
+              "specializations": []
+            },
+            "postgraduate": {
+              "name": "MD / MS / DNB",
+              "duration": "3 years",
+              "specializations": [
+                "General Medicine",
+                "Pediatrics",
+                "Radiology",
+                "Psychiatry",
+                "Dermatology",
+                "General Surgery",
+                "Orthopaedics",
+                "Obstetrics & Gynecology",
+                "ENT",
+                "Ophthalmology"
+              ]
+            },
+            "advanced": {
+              "name": "DM / MCh / Fellowships / Ph.D.",
+              "duration": "2-5 years",
+              "researchAreas": [
+                "Cardiology",
+                "Neurology",
+                "Nephrology",
+                "Endocrinology",
+                "Gastroenterology",
+                "Neurosurgery",
+                "Urology",
+                "Pediatric Surgery",
+                "Plastic Surgery",
+                "Oncology",
+                "Critical Care Medicine"
+              ]
+            },
+            "alternativePaths": {
+              "publicHealth": [
+                "MPH (Master of Public Health)",
+                "MBA in Hospital Administration",
+                "MHA (Master of Hospital Administration)"
+              ],
+              "abroadExams": [
+                "USMLE (USA)",
+                "PLAB (UK)",
+                "AMC (Australia)",
+                "MCCQE (Canada)",
+                "MOH/DHA (Gulf Countries)"
+              ],
+              "governmentExams": [
+                "UPSC CMS",
+                "State PSC (Assistant Surgeon)",
+                "Armed Forces Medical Services",
+                "ESI",
+                "Railways",
+                "AIIMS Recruitment"
+              ]
+            }
+          }
+        }
+      ]
     },
     {
       "id": "commerce-management",
