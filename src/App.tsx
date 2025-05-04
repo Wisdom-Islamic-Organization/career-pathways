@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CareerProvider } from './context/CareerContext';
+import Header from './components/Header';
 import MindMapView from './pages/MindMapView';
 import './styles/main.scss';
 
@@ -8,7 +9,8 @@ function App() {
     <Router>
       <CareerProvider>
         <div className="app">
-          <main style={{ height: '100vh' }}>
+          <Header />
+          <main style={{ height: 'calc(100vh - 120px)' }}>
             <Routes>
               <Route path="/" element={<MindMapView />} />
             </Routes>

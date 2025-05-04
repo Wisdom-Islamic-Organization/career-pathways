@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as d3 from 'd3';
-import { useCareer } from '../context/CareerContext';
+import { useCareer } from '../context/useCareer';
 import MindMapControls from './MindMapControls';
 
 // Define types for our hierarchy data
@@ -23,7 +23,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
   const [translate, setTranslate] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
 
   // Simplified handler for domains - just expands the clicked domain
-  const handleDomainClick = (domainId: string) => {
+  const handleDomainClick = useCallback((domainId: string) => {
     // If we click on the already expanded domain, collapse it
     if (expandedDomain === domainId) {
       selectDomain(null);
@@ -34,14 +34,14 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       setExpandedDomain(domainId);
     }
     selectSubdomain(null);
-  };
+  }, [expandedDomain, selectDomain, selectSubdomain]);
 
   // Separate handler for subdomains - shows details
-  const handleSubdomainClick = (domainId: string, subdomainId: string) => {
+  const handleSubdomainClick = useCallback((domainId: string, subdomainId: string) => {
     selectDomain(domainId);
     selectSubdomain(subdomainId);
     onNodeClick();
-  };
+  }, [selectDomain, selectSubdomain, onNodeClick]);
 
   const handleZoomIn = () => {
     setScale(prevScale => Math.min(prevScale * 1.2, 3));
@@ -318,7 +318,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       window.removeEventListener('resize', handleResize);
     };
 
-  }, [domains, expandedDomain, selectedDomain, selectedSubdomain, scale, translate]);
+  }, [domains, expandedDomain, selectedDomain, selectedSubdomain, scale, translate, handleDomainClick, handleSubdomainClick, selectDomain, selectSubdomain]);
 
   return (
     <div className="mindmap-view" onWheel={handleWheel}>

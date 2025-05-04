@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { useCareer } from '../context/CareerContext';
+import { useCareer } from '../context/useCareer';
 
 // Define types for our hierarchy data
 interface NodeData {

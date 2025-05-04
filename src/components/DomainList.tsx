@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCareer } from '../context/CareerContext';
+import { useCareer } from '../context/useCareer';
 
 const DomainList: React.FC = () => {
   const { domains, selectedDomain, selectDomain } = useCareer();

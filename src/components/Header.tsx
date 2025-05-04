@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useCareer } from '../context/CareerContext';
+import { useCareer } from '../context/useCareer';
 import Breadcrumb from './Breadcrumb';
 
 const Header: React.FC = () => {
   const { selectedDomain, selectedSubdomain, selectDomain, selectSubdomain } = useCareer();
-  const location = useLocation();
 
   const handleGoBack = () => {
     if (selectedSubdomain) {
@@ -30,17 +28,7 @@ const Header: React.FC = () => {
               ← Back
             </button>
           )}
-          <h1>Career Pathways</h1>
         </div>
-        
-        <nav className="main-nav">
-          <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
-            Home
-          </Link>
-          <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>
-            About
-          </Link>
-        </nav>
       </div>
       
       <div className="container">

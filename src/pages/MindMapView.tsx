@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useCareer } from '../context/CareerContext';
+import { useCareer } from '../context/useCareer';
 import FullScreenMindMap from '../components/FullScreenMindMap';
-import SubdomainDetail from '../components/SubdomainDetail';
 import EducationLevelList from '../components/EducationLevelList';
 import EducationLevelDetail from '../components/EducationLevelDetail';
 

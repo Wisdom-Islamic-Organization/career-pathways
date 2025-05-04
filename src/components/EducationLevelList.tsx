@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCareer } from '../context/CareerContext';
+import { useCareer } from '../context/useCareer';
 import { EducationLevel } from '../data/careerPathways';
 
 interface EducationLevelListProps {

@@ -1,7 +1,7 @@
-import { createContext, useState, ReactNode, useContext, useEffect } from 'react';
+import { createContext, useState, ReactNode, useEffect } from 'react';
 import careerPathwaysData, { Domain, Subdomain, EducationLevel } from '../data/careerPathways';
 
-interface CareerContextType {
+export interface CareerContextType {
   domains: Domain[];
   selectedDomain: Domain | null;
   selectedSubdomain: Subdomain | null;
@@ -20,7 +20,9 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   const [selectedEducationLevel, setSelectedEducationLevel] = useState<EducationLevel | null>(null);
 
   useEffect(() => {
-    setDomains(careerPathwaysData.domains);
+    // Convert or validate the data to ensure it matches the Domain[] type
+    const domainsData = careerPathwaysData.domains as Domain[];
+    setDomains(domainsData);
   }, []);
 
   const selectDomain = (domainId: string | null) => {
@@ -70,10 +72,4 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useCareer = (): CareerContextType => {
-  const context = useContext(CareerContext);
-  if (!context) {
-    throw new Error('useCareer must be used within a CareerProvider');
-  }
-  return context;
-}; 
+export { CareerContext }; 
