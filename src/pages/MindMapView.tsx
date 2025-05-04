@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useCareer } from '../context/CareerContext';
 import FullScreenMindMap from '../components/FullScreenMindMap';
 import SubdomainDetail from '../components/SubdomainDetail';
+import EducationLevelList from '../components/EducationLevelList';
+import EducationLevelDetail from '../components/EducationLevelDetail';
 
 const MindMapView: React.FC = () => {
-  const { selectedDomain, selectedSubdomain } = useCareer();
+  const { selectedDomain, selectedSubdomain, selectedEducationLevel, selectEducationLevel } = useCareer();
   const [showDetail, setShowDetail] = useState(false);
 
   // Show detail panel when a subdomain is selected
@@ -14,12 +16,35 @@ const MindMapView: React.FC = () => {
     }
   }, [selectedSubdomain]);
 
+  // Reset the detail panel when education level changes
+  useEffect(() => {
+    if (selectedEducationLevel) {
+      setShowDetail(true);
+    }
+  }, [selectedEducationLevel]);
+
   const toggleDetail = () => {
     setShowDetail(!showDetail);
   };
 
   const handleCloseDetail = () => {
     setShowDetail(false);
+    if (selectedEducationLevel) {
+      selectEducationLevel(null);
+    }
+  };
+
+  const renderDetailContent = () => {
+    if (selectedEducationLevel && selectedEducationLevel.type !== 'undergraduate') {
+      // Show education level details for postgraduate and advanced levels
+      return <EducationLevelDetail level={selectedEducationLevel} />;
+    } else if (selectedEducationLevel && selectedEducationLevel.type === 'undergraduate') {
+      // For undergraduate, just show the next steps without detail modal
+      return <EducationLevelList onSelectLevel={selectEducationLevel} />;
+    } else {
+      // Show education level selection when no level is selected
+      return <EducationLevelList onSelectLevel={selectEducationLevel} />;
+    }
   };
 
   return (
@@ -37,9 +62,9 @@ const MindMapView: React.FC = () => {
       
       {selectedSubdomain && showDetail && (
         <div className="detail-overlay" onClick={handleCloseDetail}>
-          <div className="detail-container" onClick={(e) => e.stopPropagation()}>
+          <div className="detail-container wide-container" onClick={(e) => e.stopPropagation()}>
             <button className="close-button" onClick={handleCloseDetail}>×</button>
-            <SubdomainDetail />
+            {renderDetailContent()}
           </div>
         </div>
       )}

@@ -380,7 +380,139 @@ export const careerPathwaysData = {
       "id": "social-science-humanities",
       "name": "Social Science and Humanities",
       "description": "Explore careers that focus on human society, relationships, and cultural expressions.",
-      "subdomains": []
+      "subdomains": [
+        {
+          "id": "social-science-humanities-overview",
+          "name": "Overview",
+          "description": "Ideal for those curious about human behavior, passionate about history, culture, or global issues, and interested in shaping policy or driving social change.",
+          "careerOptions": [
+            "Sociologist",
+            "Psychologist",
+            "Historian",
+            "Policy Analyst",
+            "Economist",
+            "Writer",
+            "Journalist",
+            "Museum Curator",
+            "Translator",
+            "Diplomat",
+            "Social Worker",
+            "Filmmaker"
+          ],
+          "educationPath": {
+            "after10": [
+              "Vocational Courses in Arts (1-2 years)",
+              "Certificate Courses in Journalism, Communication, or Languages"
+            ],
+            "after12": [
+              "B.A. in Social Sciences / Humanities (3 years)",
+              "Integrated M.A. (5 years)",
+              "B.S.W. (Bachelor of Social Work)",
+              "B.J.M.C. (Bachelor of Journalism and Mass Communication)",
+              "B.A. in Liberal Arts",
+              "B.A. in Psychology / Anthropology",
+              "B.Des. (Communication Design / Visual Arts)"
+            ],
+            "alternatePaths": [
+              "Diploma in Social Work + Field Jobs",
+              "Vocational Courses + Industry Certifications",
+              "Certificate Courses + Freelancing / Further Studies"
+            ]
+          },
+          "disciplines": [
+            {
+              "field": "Sociology",
+              "description": "Study society, social behavior",
+              "exampleCareers": ["Sociologist", "Social Researcher"]
+            },
+            {
+              "field": "Psychology",
+              "description": "Study mind, behavior",
+              "exampleCareers": ["Clinical Psychologist", "Counselor"]
+            },
+            {
+              "field": "History",
+              "description": "Study past events, cultures",
+              "exampleCareers": ["Historian", "Archivist", "Museum Curator"]
+            },
+            {
+              "field": "Political Science",
+              "description": "Study governance, policies",
+              "exampleCareers": ["Policy Analyst", "Diplomat"]
+            },
+            {
+              "field": "Economics",
+              "description": "Study resources, markets",
+              "exampleCareers": ["Economist", "Financial Analyst"]
+            },
+            {
+              "field": "Literature / Languages",
+              "description": "Study texts, communication",
+              "exampleCareers": ["Writer", "Translator", "Editor"]
+            },
+            {
+              "field": "Anthropology",
+              "description": "Study human cultures, evolution",
+              "exampleCareers": ["Anthropologist", "Cultural Consultant"]
+            },
+            {
+              "field": "Media & Communication",
+              "description": "Study media, storytelling",
+              "exampleCareers": ["Journalist", "PR Specialist", "Filmmaker"]
+            }
+          ],
+          "institutions": {
+            "national": [
+              "JNU (Jawaharlal Nehru University)",
+              "DU (University of Delhi)",
+              "TISS (Tata Institute of Social Sciences)",
+              "Presidency University, Kolkata",
+              "St. Xavier’s College, Mumbai",
+              "Christ University, Bangalore",
+              "Ashoka University",
+              "Azim Premji University",
+              "Shiv Nadar University",
+              "OP Jindal Global University",
+              "Symbiosis University"
+            ],
+            "kerala": [
+              "University of Kerala, Thiruvananthapuram",
+              "Mahatma Gandhi University, Kottayam",
+              "Central University of Kerala, Kasaragod",
+              "St. Teresa’s College, Ernakulam",
+              "Sacred Heart College, Kochi",
+              "Farook College, Kozhikode",
+              "Loyola College of Social Sciences, Thiruvananthapuram",
+              "CMS College, Kottayam",
+              "Rajagiri College of Social Sciences, Kochi"
+            ]
+          },
+          "jobSectors": [
+            "Government (Civil Services, Public Policy, Education)",
+            "NGOs and Social Work",
+            "Media and Publishing",
+            "Education and Research",
+            "Corporate (HR, CSR, Communication)",
+            "Creative Industries (Writing, Arts)",
+            "International Organizations (UN, WHO, UNESCO)"
+          ],
+          "softSkills": [
+            "Communication",
+            "Empathy",
+            "Critical Thinking",
+            "Research and Analysis",
+            "Cultural Sensitivity",
+            "Collaboration and Advocacy"
+          ],
+          "roleModels": [
+            "Amartya Sen (Economist, Nobel Laureate)",
+            "Romila Thapar (Historian)",
+            "Irfan Habib (Historian)",
+            "Shashi Tharoor (Author, Diplomat)",
+            "Ravish Kumar (Journalist)"
+          ]
+        }
+      ]
     },
     {
       "id": "abroad-studies",
@@ -404,6 +536,14 @@ export type Subdomain = {
   description: string;
   careerOptions: string[];
   educationPath: EducationPath;
+  educationLevels?: EducationLevel[];
+};
+
+export type EducationLevel = {
+  id: string;
+  name: string;
+  description: string;
+  type: 'undergraduate' | 'postgraduate' | 'advanced';
 };
 
 export type EducationPath = {

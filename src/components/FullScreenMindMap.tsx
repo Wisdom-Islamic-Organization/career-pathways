@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { useCareer } from '../context/CareerContext';
+import MindMapControls from './MindMapControls';
 
 // Define types for our hierarchy data
 interface NodeData {
@@ -18,6 +19,8 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
   const { domains, selectedDomain, selectDomain, selectedSubdomain, selectSubdomain } = useCareer();
   const svgRef = useRef<SVGSVGElement>(null);
   const [expandedDomain, setExpandedDomain] = useState<string | null>(null);
+  const [scale, setScale] = useState<number>(1);
+  const [translate, setTranslate] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
 
   // Simplified handler for domains - just expands the clicked domain
   const handleDomainClick = (domainId: string) => {
@@ -40,6 +43,29 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
     onNodeClick();
   };
 
+  const handleZoomIn = () => {
+    setScale(prevScale => Math.min(prevScale * 1.2, 3));
+  };
+
+  const handleZoomOut = () => {
+    setScale(prevScale => Math.max(prevScale / 1.2, 0.5));
+  };
+
+  const handleReset = () => {
+    setScale(1);
+    setTranslate({ x: 0, y: 0 });
+  };
+
+  // Add this within the component, where the event handlers are defined
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      handleZoomIn();
+    } else {
+      handleZoomOut();
+    }
+  };
+
   useEffect(() => {
     if (!svgRef.current || domains.length === 0) return;
 
@@ -54,6 +80,10 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
     svg
       .attr('width', containerWidth)
       .attr('height', containerHeight);
+    
+    // Create a group with transformation for zoom behavior
+    const g = svg.append("g")
+      .attr("transform", `translate(${containerWidth / 2 + translate.x},${containerHeight / 2 + translate.y}) scale(${scale})`);
     
     // Create a hierarchical structure
     let hierarchyData: NodeData;
@@ -87,22 +117,18 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
     }
 
     // Calculate layout
-    const diameter = Math.min(containerWidth, containerHeight) * 0.8; // Slightly smaller for better spacing
+    const diameter = Math.min(containerWidth, containerHeight) * 0.85; // Slightly larger for better spacing
     const radius = diameter / 2;
     
     // Use a radial layout for domains
     const tree = d3.cluster<NodeData>()
-      .size([360, radius - 140]); // Reduce radius for better spacing
+      .size([360, radius - 170]); // Reduce radius for better spacing
     
     // Convert the data to a d3 hierarchy
     const root = d3.hierarchy<NodeData>(hierarchyData);
     
     // Generate tree coordinates
     const rootWithLayout = tree(root);
-    
-    // Create a group element for the entire visualization
-    const g = svg.append("g")
-      .attr("transform", `translate(${containerWidth / 2},${containerHeight / 2})`);
     
     // Create a subtle gradient for the links
     const defs = svg.append("defs");
@@ -114,19 +140,21 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       
     gradient.append("stop")
       .attr("offset", "0%")
-      .attr("stop-color", "#c1c8d0");
+      .attr("stop-color", "#c5c5c5");
       
     gradient.append("stop")
       .attr("offset", "100%")
-      .attr("stop-color", "#e8eaed");
+      .attr("stop-color", "#d8d8d8");
     
-    // Draw links between nodes with better curves
+    // Draw links between nodes with straight lines
     g.selectAll(".link")
       .data(rootWithLayout.links())
       .enter()
       .append("path")
       .attr("class", "link")
-      .attr("stroke", "url(#link-gradient)")
+      .attr("stroke", "#c5c5c5")
+      .attr("stroke-width", 1.2)
+      .attr("opacity", 0.5)
       .attr("d", (d) => {
         // Get source and target coordinates
         const sx = Math.cos((d.source.x! - 90) * (Math.PI / 180)) * d.source.y!;
@@ -134,31 +162,8 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
         const tx = Math.cos((d.target.x! - 90) * (Math.PI / 180)) * d.target.y!;
         const ty = Math.sin((d.target.x! - 90) * (Math.PI / 180)) * d.target.y!;
         
-        // Update gradient coordinates for this specific link
-        gradient.attr("x1", sx).attr("y1", sy).attr("x2", tx).attr("y2", ty);
-        
-        if (d.source.depth === 0) {
-          // For links from root, use straight lines
-          return `M${sx},${sy}L${tx},${ty}`;
-        } else {
-          // For other links, use curved lines
-          // Calculate control points for a subtle curve
-          const midX = (sx + tx) / 2;
-          const midY = (sy + ty) / 2;
-          
-          // Calculate curve based on distance
-          const dx = tx - sx;
-          const dy = ty - sy;
-          const angle = Math.atan2(dy, dx) - Math.PI / 2;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          // Calculate curve control point - more subtle
-          const offset = distance * 0.1; // Even more subtle curve
-          const cpx = midX + Math.cos(angle) * offset;
-          const cpy = midY + Math.sin(angle) * offset;
-          
-          return `M${sx},${sy}Q${cpx},${cpy} ${tx},${ty}`;
-        }
+        // Use straight lines for all connections
+        return `M${sx},${sy}L${tx},${ty}`;
       });
     
     // Create groups for each node type to manage z-index ordering
@@ -209,7 +214,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       // Add a larger invisible circle for easier clicking
       node.append("circle")
         .attr("class", "click-area")
-        .attr("r", d.depth === 0 ? 40 : d.depth === 1 ? 35 : 25)
+        .attr("r", d.depth === 0 ? 50 : d.depth === 1 ? 44 : 34)
         .attr("fill", "transparent")
         .style("cursor", "pointer")
         .on("click", (event) => {
@@ -225,8 +230,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       
       // Add the visible circle - slightly smaller for cleaner look
       node.append("circle")
-        .attr("class", "visible-circle")
-        .attr("r", d.depth === 0 ? 30 : d.depth === 1 ? 24 : 18)
+        .attr("r", d.depth === 0 ? 40 : d.depth === 1 ? 34 : 26)
         .attr("pointer-events", "none");
       
       // Add a simpler text label
@@ -237,19 +241,19 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       // Add background for text - simpler, cleaner style
       const bg = text.append("rect")
         .attr("fill", "white")
-        .attr("opacity", 0.95)
-        .attr("rx", 4)
-        .attr("ry", 4)
-        .attr("x", -60)
-        .attr("y", d.depth === 0 ? 38 : d.depth === 1 ? 32 : 24)
-        .attr("width", 120)
-        .attr("height", 24);
+        .attr("opacity", 0.98)
+        .attr("rx", 8)
+        .attr("ry", 8)
+        .attr("x", -70)
+        .attr("y", d.depth === 0 ? 46 : d.depth === 1 ? 40 : 32)
+        .attr("width", 140)
+        .attr("height", 30);
       
       // Add text - cleaner font
       const textElement = text.append("text")
         .attr("text-anchor", "middle")
-        .attr("y", d.depth === 0 ? 55 : d.depth === 1 ? 48 : 40)
-        .attr("font-size", d.depth === 0 ? 14 : d.depth === 1 ? 13 : 12)
+        .attr("y", d.depth === 0 ? 66 : d.depth === 1 ? 60 : 50)
+        .attr("font-size", d.depth === 0 ? 17 : d.depth === 1 ? 16 : 15)
         .attr("font-weight", d.depth === 0 ? 600 : 500)
         .attr("fill", "#202124");
       
@@ -273,11 +277,11 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
         
         textElement.append("tspan")
           .attr("x", 0)
-          .attr("dy", "1.2em")
+          .attr("dy", "1.3em")
           .text(secondLine);
           
-        bg.attr("height", 40)
-          .attr("y", (d.depth === 0 ? 38 : d.depth === 1 ? 32 : 24) - 8);
+        bg.attr("height", 48)
+          .attr("y", (d.depth === 0 ? 46 : d.depth === 1 ? 40 : 32) - 8);
       } else {
         // For short names, keep as is
         textElement.append("tspan")
@@ -305,7 +309,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
           .attr('width', newWidth)
           .attr('height', newHeight);
           
-        g.attr("transform", `translate(${newWidth / 2},${newHeight / 2})`);
+        g.attr("transform", `translate(${newWidth / 2 + translate.x},${newHeight / 2 + translate.y}) scale(${scale})`);
       }
     };
 
@@ -314,11 +318,27 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       window.removeEventListener('resize', handleResize);
     };
 
-  }, [domains, selectedDomain, selectedSubdomain, expandedDomain, onNodeClick, selectDomain, selectSubdomain]);
+  }, [domains, expandedDomain, selectedDomain, selectedSubdomain, scale, translate]);
 
   return (
-    <div className="fullscreen-mindmap">
-      <svg ref={svgRef} />
+    <div className="mindmap-view" onWheel={handleWheel}>
+      <svg ref={svgRef}></svg>
+      <MindMapControls 
+        onZoomIn={handleZoomIn}
+        onZoomOut={handleZoomOut}
+        onReset={handleReset}
+      />
+      {selectedSubdomain && (
+        <div className="node-tooltip">
+          <div className="tooltip-content">
+            <strong>{selectedSubdomain.name}</strong>
+            <p>{selectedSubdomain.description.substring(0, 100)}...</p>
+            <button onClick={onNodeClick} className="view-details-btn">
+              View Details
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
