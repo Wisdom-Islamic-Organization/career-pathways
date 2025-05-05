@@ -296,7 +296,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       
       // Add each line of text
       lines.forEach((lineText, i) => {
-        const lineHeight = 15
+        const lineHeight = 50
         const yPos = (i - (lines.length - 1) / 2) * lineHeight;
         
         textElement.append("tspan")
