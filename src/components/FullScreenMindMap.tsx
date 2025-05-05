@@ -6,6 +6,7 @@ import MindMapControls from './MindMapControls';
 // Define types for our hierarchy data
 interface NodeData {
   name: string;
+  icon?: string;
   id?: string;
   domain?: string;
   children?: NodeData[];
@@ -106,6 +107,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
         name: "Career Pathways",
         children: [{
           name: domain.name,
+          icon: domain.icon,
           id: domain.id,
           children: domain.subdomains.map(subdomain => ({
             name: subdomain.name,
@@ -120,6 +122,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
         name: "Career Pathways",
         children: domains.map(domain => ({
           name: domain.name,
+          icon: domain.icon,
           id: domain.id
         }))
       };
@@ -245,6 +248,18 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
         .attr("stroke-width", 1.5)
         .attr("pointer-events", "none");
       
+      // Add icon if available (for root and domain nodes)
+      if (d.data.icon && (d.depth === 0 || d.depth === 1)) {
+        node.append("text")
+          .attr("class", "icon")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "central")
+          .style("font-size", "2rem") // Larger icon for root
+          .attr("y", -20) // Position above the text
+          .text(d.data.icon)
+          .attr("pointer-events", "none");
+      }
+      
       // Text handling - improved to show more text
       const textGroup = node.append("g")
         .attr("class", "node-text")
@@ -253,13 +268,13 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       // Add the text with line wrapping
       const textElement = textGroup.append("text")
         .attr("text-anchor", "middle")
-        .attr("font-size", d.depth === 0 ? "22px" : d.depth === 1 ? "20px" : "18px")
-        .attr("font-weight", d.depth === 0 ? "bold" : d.depth === 1 ? "semi-bold" : "normal")
+        .attr("dy", (d.depth === 0 || d.depth === 1) && d.data.icon ? "35px" : "0px") 
+        .style("font-weight", "bold")
         .attr("fill", "#333");
       
       // Split the text into multiple lines if needed
       const words = d.data.name.split(/\s+/);
-      let lines: string[] = [];
+      const lines: string[] = [];
       let line = "";
       
       words.forEach(word => {
@@ -281,7 +296,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       
       // Add each line of text
       lines.forEach((lineText, i) => {
-        const lineHeight = d.depth === 0 ? 26 : d.depth === 1 ? 24 : 22;
+        const lineHeight = 15
         const yPos = (i - (lines.length - 1) / 2) * lineHeight;
         
         textElement.append("tspan")
@@ -321,7 +336,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [handleResize]);
   
   return (
     <div

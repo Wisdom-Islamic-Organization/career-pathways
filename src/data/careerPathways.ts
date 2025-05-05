@@ -2,6 +2,7 @@ export const careerPathwaysData = {
   domains: [
     {
       id: "pure-science",
+      icon: "🔬",
       name: "Pure Science",
       description: "Explore careers in fundamental scientific disciplines that form the basis of our understanding of the natural world.",
       subdomains: [
@@ -333,6 +334,7 @@ export const careerPathwaysData = {
     },
    {
       id: "engineering-technology",
+      icon: "🔧",
       name: "Engineering & Technology",
       description: "Explore careers in engineering and technology fields that drive innovation through machines, software, infrastructure, and emerging technologies.",
       subdomains: [
@@ -772,6 +774,7 @@ export const careerPathwaysData = {
     },
     {
       id: "medicine",
+      icon: "🏥",
       name: "Medicine",
       description: "Explore careers in healthcare and medical fields that focus on human health and wellbeing.",
       subdomains: [
@@ -1284,6 +1287,7 @@ export const careerPathwaysData = {
     },
     {
       id: "commerce-management",
+      icon: "💰",
       name: "Commerce and Management",
       description: "Courses in trade, finance, business, economics, and management.",
       subdomains: [
@@ -1566,6 +1570,7 @@ export const careerPathwaysData = {
     },
     {
       id: "social-science-humanities",
+      icon: "👥",
       name: "Social Sciences and Humanities",
       description: "Explore career pathways in social sciences and humanities, offering diverse academic and vocational options after Class 10 and 12, with structured progression and career opportunities.",
       subdomains: [
@@ -1992,6 +1997,7 @@ export const careerPathwaysData = {
     },
     {
       id: "short-term-career-programs",
+      icon: "💼",
       name: "Short-Term Career Programs",
       description: "Explore short-term, skill-based programs after 10th/12th for quick entry into high-demand industries like technology, marketing, logistics, and skilled trades.",
       subdomains: [
@@ -2348,6 +2354,7 @@ institutions: [
     },
     {
       id: "islamic-studies",
+      icon: "🕌",
       name: "Islamic Studies",
       description: "Programs offered by leading Islamic universities, combining Islamic studies (Quranic sciences, Sharia, theology) with secular disciplines (medicine, engineering, business) for holistic education.",
       subdomains: [
@@ -2500,6 +2507,7 @@ institutions: [
     },
     {
       id: "various-competitive-exams-india",
+      icon: "🏆",
       name: "Various Competitive Exams in India",
       description: "Competitive exams for admission to top educational institutions, government jobs, and professional courses in India. Covers engineering, medical, law, management, civil services, and more. Check official websites (e.g., upsc.gov.in, nta.ac.in, ssc.nic.in, ibps.in) for 2025 schedules and eligibility.",
       subdomains: [
@@ -2828,12 +2836,116 @@ institutions: [
           }
         }
       ]
+    },
+    {
+      "id": "education",
+      "icon": "🏫",
+      "name": "Education",
+      "description": "Explore careers in teaching and educational training that shape future generations.",
+      "subdomains": [
+        {
+          "id": "teacher-education",
+          "name": "Teacher Education",
+          "description": "Study of pedagogical methods and training to become qualified educators for various school levels.",
+          "careerOptions": [
+            "Primary School Teacher",
+            "Secondary School Teacher",
+            "Higher Secondary School Teacher",
+            "Pre-Primary Teacher",
+            "Teacher Educator",
+            "School Administrator"
+          ],
+          "educationPath": {
+            "undergraduate": {
+              "name": "B.Ed, B.El.Ed, Integrated B.Ed (BA B.Ed, B.Sc B.Ed), D.El.Ed, D.Ed, DECE, NTT",
+              "duration": "1-4 years",
+              "specializations": [
+                "Elementary Education",
+                "Secondary Education",
+                "Early Childhood Education",
+                "Special Education"
+              ],
+              "institutions": [
+                "Lady Shri Ram College for Women, Delhi",
+                "Jamia Millia Islamia, New Delhi",
+                "Regional Institute of Education, Ajmer",
+                "Regional Institute of Education, Bhopal",
+                "Regional Institute of Education, Bhubaneswar",
+                "Regional Institute of Education, Mysore",
+                "Banaras Hindu University, Varanasi",
+                "Manav Rachna University, Faridabad",
+                "Calicut University Teacher Education Centres, Kozhikode",
+                "Mahatma Gandhi University, Kottayam",
+                "Kerala University, Thiruvananthapuram",
+                "National Institute of Open Schooling, New Delhi",
+                "District Institute of Education and Training, Thrissur",
+                "Government College of Teacher Education, Kozhikode",
+                "Brennen College of Teacher Education, Thalassery",
+                "Institute of Home Economics, Delhi",
+                "Gargi College, Delhi",
+                "Miranda House, Delhi",
+                "Central University of Rajasthan, Ajmer",
+                "Tata Institute of Social Sciences, Mumbai",
+                "Kannur University, Kannur",
+                "Delhi Teacher Training College, Delhi",
+                "Government Teacher Training Institute, Thrissur",
+                "Carmel Teacher Training Institute, Alappuzha",
+                "Indira Gandhi National Open University, New Delhi",
+                "Delhi Institute of Early Childhood Care and Education, New Delhi",
+                "State Council of Educational Research and Training, Kerala",
+                "Sree Narayana Training College, Nedunganda",
+                "Bharatiya Shiksha Parishad, Uttar Pradesh",
+                "Singhania University, Jhunjhunu",
+                "Kerala Institute of Early Childhood Education, Thiruvananthapuram",
+                "Holy Trinity College of Education, Kochi"
+              ]
+            },
+            "postgraduate": {
+              "name": "M.Ed",
+              "duration": "2 years",
+              "specializations": [
+                "Educational Technology",
+                "Curriculum and Instruction",
+                "Educational Administration",
+                "Special Education"
+              ],
+              "institutions": [
+                "Jamia Millia Islamia, New Delhi",
+                "Banaras Hindu University, Varanasi",
+                "K.J. Somaiya College of Education, Mumbai",
+                "Mahatma Gandhi University, Kottayam",
+                "University of Kerala, Thiruvananthapuram",
+                "Farook Training College, Kozhikode"
+              ]
+            },
+            "advanced": {
+              "name": "Ph.D. in Education",
+              "duration": "3-5 years",
+              "researchAreas": [
+                "Educational Psychology",
+                "Curriculum Development",
+                "Teacher Education",
+                "Educational Policy",
+                "Inclusive Education"
+              ],
+              "institutions": [
+                "Jamia Millia Islamia, New Delhi",
+                "Banaras Hindu University, Varanasi",
+                "University of Delhi, Delhi",
+                "Mahatma Gandhi University, Kottayam",
+                "University of Kerala, Thiruvananthapuram"
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 };
 
 export type Domain = {
   id: string;
+  icon: string;
   name: string;
   description: string;
   subdomains: Subdomain[];

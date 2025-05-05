@@ -50,7 +50,7 @@ const MindMapView: React.FC = () => {
     <div className="mindmap-view">
       <div className="mindmap-title">
         {selectedDomain ? (
-          <h2>{selectedDomain.name}</h2>
+          <h2>{selectedDomain.icon} {selectedDomain.name}</h2>
         ) : (
           <h2>Explore Career Domains</h2>
         )}
