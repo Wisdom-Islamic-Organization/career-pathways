@@ -9,7 +9,7 @@ const Header: React.FC = () => {
           <img src="/logo1.png" alt="Left Logo" />
         </div>
         <div className="header-center">
-          <Breadcrumb />
+        <Breadcrumb />
         </div>
         <div className="header-logo right-logo">
           <img src="/logo2.png" alt="Right Logo" />

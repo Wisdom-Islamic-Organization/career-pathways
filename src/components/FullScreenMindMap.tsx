@@ -326,17 +326,19 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
     
   }, [domains, selectedDomain, selectedSubdomain, expandedDomain, scale, translate, handleDomainClick, handleSubdomainClick]);
   
-  const handleResize = () => {
-    // Force re-render on resize
-    setScale(scale);
-  };
-  
+  // Move handleResize inside useEffect to fix the dependency warning
   useEffect(() => {
+    // Define the resize handler inside the effect to avoid dependency issues
+    const handleResize = () => {
+      // Force re-render on resize
+      setScale(prevScale => prevScale); // This will trigger a re-render without changing the value
+    };
+    
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [handleResize]);
+  }, []); // Empty dependency array since handleResize is defined inside
   
   return (
     <div
