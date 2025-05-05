@@ -40,7 +40,7 @@ const EducationLevelDetail: React.FC<EducationLevelDetailProps> = ({ level }) =>
           </div>
         </div>
         
-        {education.specializations && (
+        {education.specializations && education.specializations.length > 0 && (
           <div className="specializations">
             <h4>Specializations</h4>
             <ul>
@@ -51,7 +51,7 @@ const EducationLevelDetail: React.FC<EducationLevelDetailProps> = ({ level }) =>
           </div>
         )}
         
-        {education.institutions && (
+        {education.institutions && education.institutions.length > 0 && (
           <div className="institutions">
             <h4>Key Institutions</h4>
             <ul>
@@ -62,7 +62,7 @@ const EducationLevelDetail: React.FC<EducationLevelDetailProps> = ({ level }) =>
           </div>
         )}
 
-        {education.researchAreas && (
+        {education.researchAreas && education.researchAreas.length > 0 && (
           <div className="research-areas">
             <h4>Research Areas</h4>
             <ul>
@@ -77,17 +77,14 @@ const EducationLevelDetail: React.FC<EducationLevelDetailProps> = ({ level }) =>
       {level.type === 'undergraduate' && (
         <div className="next-steps">
           <h3>Next Steps</h3>
-          <p>After completing undergraduate studies, you can pursue postgraduate education for further specialization.</p>
-          <div className="career-preview">
-            <h4>Career Preview</h4>
-            <p>Entry-level positions that may be available after this stage:</p>
-            <ul className="career-list-preview">
-              {selectedSubdomain.careerOptions.slice(0, 2).map((career, index) => (
-                <li key={index}>{career}</li>
-              ))}
-              <li>...and more with additional experience</li>
-            </ul>
-          </div>
+          <p>After completing undergraduate studies, you can pursue postgraduate education for further specialization such as {selectedSubdomain.educationPath.postgraduate.name}.</p>
+        </div>
+      )}
+
+      {level.type === 'postgraduate' && (
+        <div className="next-steps">
+          <h3>Next Steps</h3>
+          <p>After completing postgraduate studies, you can pursue advanced education for research and expertise such as {selectedSubdomain.educationPath.advanced.name}.</p>
         </div>
       )}
     </div>

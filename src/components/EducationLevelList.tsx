@@ -46,6 +46,16 @@ const EducationLevelList: React.FC<EducationLevelListProps> = ({ onSelectLevel }
         Select an education level to explore details and career opportunities in {selectedSubdomain.name}
       </p>
 
+      <div className="career-options-section">
+        <h3>Career Options</h3>
+        <p>Upon completion of this education level, you may pursue careers such as:</p>
+        <ul className="career-list-preview">
+          {selectedSubdomain.careerOptions.map((career, index) => (
+            <li key={index}>{career}</li>
+          ))}
+        </ul>
+      </div>
+
       <div className="education-level-grid">
         {educationLevels.map((level) => (
           <div 

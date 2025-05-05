@@ -43,6 +43,15 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
     onNodeClick();
   }, [selectDomain, selectSubdomain, onNodeClick]);
 
+  // Update the expandedDomain state when selectedDomain changes
+  useEffect(() => {
+    if (!selectedDomain) {
+      setExpandedDomain(null);
+    } else if (selectedDomain && !expandedDomain) {
+      setExpandedDomain(selectedDomain.id);
+    }
+  }, [selectedDomain, expandedDomain]);
+
   const handleZoomIn = () => {
     setScale(prevScale => Math.min(prevScale * 1.2, 3));
   };

@@ -2345,6 +2345,489 @@ institutions: [
           }
         }
       ]
+    },
+    {
+      id: "islamic-studies",
+      name: "Islamic Studies",
+      description: "Programs offered by leading Islamic universities, combining Islamic studies (Quranic sciences, Sharia, theology) with secular disciplines (medicine, engineering, business) for holistic education.",
+      subdomains: [
+        {
+          id: "al-azhar-university",
+          name: "Al-Azhar University (Egypt)",
+          description: "Located in Cairo, Al-Azhar is a global leader in Sunni Islamic scholarship, offering Islamic and secular programs. Arabic proficiency required for Islamic studies; language courses available. Scholarships offered, co-educational with gender segregation.",
+          careerOptions: [
+            "Islamic Scholar",
+            "Mufti",
+            "Qari",
+            "Medical Professional",
+            "Engineer",
+            "Business Administrator"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "Theology (Usul al-Din), Sharia, Arabic Language, Da’wah, Quranic Studies, Adhan Course, Medicine, Pharmacy, Dentistry, Engineering, Science, Agriculture, Business, Arts, Education",
+              duration: "4-6 years",
+              institutions: ["Al-Azhar University, Cairo"]
+            },
+            postgraduate: {
+              name: "Master’s in Islamic Studies, Medicine, Engineering, Business, Sciences",
+              duration: "2-3 years",
+              institutions: ["Al-Azhar University, Cairo"]
+            },
+            advanced: {
+              name: "PhD in Islamic Studies, Medical Sciences, Engineering, Humanities",
+              duration: "3-5 years",
+              institutions: ["Al-Azhar University, Cairo"]
+            }
+          }
+        },
+        {
+          id: "islamic-university-madinah",
+          name: "Islamic University of Madinah (Saudi Arabia)",
+          description: "A male-only institution in Madinah, known for Islamic studies with Salafi influence and secular programs. Full scholarships available. Arabic proficiency required; language training provided.",
+          careerOptions: [
+            "Islamic Jurist",
+            "Quranic Scholar",
+            "Engineer",
+            "Computer Scientist",
+            "Lawyer"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "Sharia, Qur’an, Hadith, Da’wah, Arabic Language, Science (Physics, Chemistry, Mathematics), Engineering (Civil, Mechanical, Electrical, Computer), Computer Science, Law",
+              duration: "4-5 years",
+              institutions: ["Islamic University of Madinah"]
+            },
+            postgraduate: {
+              name: "Master’s in Islamic Studies, Engineering, Sciences, Law",
+              duration: "2-3 years",
+              institutions: ["Islamic University of Madinah"]
+            },
+            advanced: {
+              name: "PhD in Islamic Studies, Engineering, Computer Science, Law",
+              duration: "3-5 years",
+              institutions: ["Islamic University of Madinah"]
+            }
+          }
+        },
+        {
+          id: "international-islamic-university-malaysia",
+          name: "International Islamic University Malaysia (IIUM)",
+          description: "Located in Kuala Lumpur, IIUM integrates Islamic and modern education, offering programs in English (Arabic for Islamic studies). Scholarships available, co-educational with gender segregation.",
+          careerOptions: [
+            "Islamic Theologian",
+            "Lawyer",
+            "Engineer",
+            "Doctor",
+            "Educator"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "Islamic Revealed Knowledge, Sharia and Law, Arabic Language, Law, Economics, Engineering, Architecture, IT, Medicine, Dentistry, Nursing, Pharmacy, Education, Languages, Humanities",
+              duration: "4-6 years",
+              institutions: ["IIUM, Kuala Lumpur"]
+            },
+            postgraduate: {
+              name: "Master’s in Islamic Studies, Law, Medicine, Engineering, Education",
+              duration: "2-3 years",
+              institutions: ["IIUM, Kuala Lumpur"]
+            },
+            advanced: {
+              name: "PhD in Islamic Studies, Sciences, Engineering, Humanities",
+              duration: "3-5 years",
+              institutions: ["IIUM, Kuala Lumpur"]
+            }
+          }
+        },
+        {
+          id: "umm-al-qura-university",
+          name: "Umm Al-Qura University (Makkah, Saudi Arabia)",
+          description: "Based in Makkah, UQU offers Islamic and secular programs with separate male/female campuses. English for most programs, Arabic for Islamic studies. Scholarships available.",
+          careerOptions: [
+            "Sharia Expert",
+            "Hajj Consultant",
+            "Doctor",
+            "Engineer",
+            "Business Analyst"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "Sharia, Da’wah, Arabic Language, Quranic Studies, Hajj and Umrah Research, Medicine, Pharmacy, Dentistry, Public Health, Nursing, Engineering, Applied Sciences, Computer Science, Business, Social Sciences, Education",
+              duration: "4-6 years",
+              institutions: ["Umm Al-Qura University, Makkah"]
+            },
+            postgraduate: {
+              name: "Master’s in Islamic Studies, Medicine, Engineering, Business, Sciences",
+              duration: "2-3 years",
+              institutions: ["Umm Al-Qura University, Makkah"]
+            },
+            advanced: {
+              name: "PhD in Islamic Studies, Medical Sciences, Engineering, Social Sciences",
+              duration: "3-5 years",
+              institutions: ["Umm Al-Qura University, Makkah"]
+            }
+          }
+        },
+        {
+          id: "jamia-al-hind-al-islamiyya",
+          name: "Jamia Al Hind Al Islamiyya (Kerala, India)",
+          description: "Located in Oorakam, Kerala, Jamia Al Hind focuses on Islamic scholarship inspired by Madinah University, offering regular, distance, and certificate courses. Includes women’s campus and modern teaching methods. Admission via entrance tests; scholarships available.",
+          careerOptions: [
+            "Islamic Scholar",
+            "Quranic Memorizer",
+            "Religious Educator",
+            "Islamic Researcher"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "School of Qur’an (Quran Memorization, Tajweed, Arabic), Sharia College (Quranic Sciences, Aqeeda, Fiqh, Hadith), Hifz College (Quran Memorization, Tajweed), Certificate Courses (Quranic Sciences, Fiqh, Arabic), Ladies Campus (Islamic Higher Secondary, Islamic Degree)",
+              duration: "1-17 years",
+              institutions: ["Jamia Al Hind Al Islamiyya, Oorakam", "Green Valley Institute, Mukkam", "Ladies Campus, Panakkad"]
+            },
+            postgraduate: {
+              name: "Kulliyathu Thaqassus (Advanced Islamic Studies, Research), Ladies Campus (Advanced Islamic Course), Al-Hikami Degree (Islamic Sciences)",
+              duration: "1-3 years",
+              institutions: ["Jamia Al Hind Al Islamiyya, Oorakam", "Ladies Campus, Panakkad"]
+            },
+            advanced: {
+              name: "Advanced Research in Islamic Studies, Distance Education (Quran, Hadith, Fiqh)",
+              duration: "2-5 years",
+              institutions: ["Jamia Al Hind Al Islamiyya, Oorakam"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      id: "various-competitive-exams-india",
+      name: "Various Competitive Exams in India",
+      description: "Competitive exams for admission to top educational institutions, government jobs, and professional courses in India. Covers engineering, medical, law, management, civil services, and more. Check official websites (e.g., upsc.gov.in, nta.ac.in, ssc.nic.in, ibps.in) for 2025 schedules and eligibility.",
+      subdomains: [
+        {
+          id: "engineering-entrance-exams",
+          name: "Engineering Entrance Exams",
+          description: "Exams for admission to undergraduate engineering programs in IITs, NITs, and other institutes. Typically require 12th pass with Physics, Chemistry, Mathematics.",
+          careerOptions: [
+            "Engineer",
+            "Research Scientist",
+            "Technical Consultant",
+            "PSU Officer"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "JEE Main, JEE Advanced, BITSAT, VITEEE, GATE",
+              duration: "1 day (exam duration)",
+              institutions: [
+                "National Testing Agency (JEE Main)",
+                "IITs (JEE Advanced, GATE)",
+                "BITS Pilani (BITSAT)",
+                "VIT Vellore (VITEEE)"
+              ]
+            },
+            postgraduate: {
+              name: "Further Competitive Exams (e.g., GATE for M.Tech)",
+              duration: "1 day",
+              institutions: ["IITs", "IISc Bangalore"]
+            },
+            advanced: {
+              name: "Specialized Certifications / Industry Entrance Tests",
+              duration: "Varies",
+              institutions: ["Various Technical Boards"]
+            }
+          }
+        },
+        {
+          id: "medical-entrance-exams",
+          name: "Medical Entrance Exams",
+          description: "Exams for MBBS, BDS, and postgraduate medical courses. Require 12th pass with Physics, Chemistry, Biology for UG, MBBS for PG.",
+          careerOptions: [
+            "Doctor",
+            "Surgeon",
+            "Medical Researcher",
+            "Dentist"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "NEET UG, NEET PG",
+              duration: "1 day",
+              institutions: ["National Testing Agency"]
+            },
+            postgraduate: {
+              name: "Further Medical Entrance Exams (e.g., NEET PG)",
+              duration: "1 day",
+              institutions: ["National Testing Agency"]
+            },
+            advanced: {
+              name: "Specialized Medical Certifications",
+              duration: "Varies",
+              institutions: ["Medical Council of India"]
+            }
+          }
+        },
+        {
+          id: "law-entrance-exams",
+          name: "Law Entrance Exams",
+          description: "Exams for undergraduate and postgraduate law programs at NLUs and other law schools. Require 12th pass for UG, LLB for PG.",
+          careerOptions: [
+            "Lawyer",
+            "Judge",
+            "Legal Consultant",
+            "Corporate Counsel"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "CLAT, AILET, LSAT India, Delhi University LLB Entrance Exam",
+              duration: "1 day",
+              institutions: [
+                "Consortium of NLUs (CLAT)",
+                "NLU Delhi (AILET)",
+                "Pearson VUE (LSAT India)",
+                "University of Delhi"
+              ]
+            },
+            postgraduate: {
+              name: "Further Law Entrance Exams (e.g., CLAT PG)",
+              duration: "1 day",
+              institutions: ["Consortium of NLUs"]
+            },
+            advanced: {
+              name: "Specialized Legal Certifications",
+              duration: "Varies",
+              institutions: ["Bar Council of India"]
+            }
+          }
+        },
+        {
+          id: "management-entrance-exams",
+          name: "Management Entrance Exams",
+          description: "Exams for MBA and PGDM programs at IIMs and other B-schools. Require Bachelor’s degree with minimum percentage.",
+          careerOptions: [
+            "Business Manager",
+            "Consultant",
+            "Entrepreneur",
+            "Financial Analyst"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "CAT, CMAT, IIFT, XAT",
+              duration: "1 day",
+              institutions: [
+                "IIMs (CAT)",
+                "National Testing Agency (CMAT)",
+                "IIFT (IIFT)",
+                "XLRI Jamshedpur (XAT)"
+              ]
+            },
+            postgraduate: {
+              name: "Further Management Entrance Exams",
+              duration: "1 day",
+              institutions: ["IIMs", "AICTE"]
+            },
+            advanced: {
+              name: "Executive MBA / Specialized Certifications",
+              duration: "Varies",
+              institutions: ["IIMs", "Private B-Schools"]
+            }
+          }
+        },
+        {
+          id: "civil-services-government-jobs",
+          name: "Civil Services and Government Jobs",
+          description: "Exams for IAS, IPS, banking, and other government roles. Require Bachelor’s degree for most, 12th pass for some (e.g., SSC CHSL).",
+          careerOptions: [
+            "Civil Servant",
+            "Bank Officer",
+            "Government Auditor",
+            "Policy Analyst"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "UPSC CSE, UPSC IES/ISS, UPSC ESE, SSC CGL, SSC CHSL, IBPS PO/Clerk, SBI PO/Clerk, RBI Grade B, NABARD Grade A/B, FCI",
+              duration: "1-2 days (varies by stage)",
+              institutions: [
+                "UPSC",
+                "Staff Selection Commission",
+                "Institute of Banking Personnel Selection",
+                "State Bank of India",
+                "Reserve Bank of India",
+                "NABARD",
+                "Food Corporation of India"
+              ]
+            },
+            postgraduate: {
+              name: "Further Government Recruitment Exams",
+              duration: "1-2 days",
+              institutions: ["UPSC", "SSC"]
+            },
+            advanced: {
+              name: "Departmental Promotions / Certifications",
+              duration: "Varies",
+              institutions: ["Government of India"]
+            }
+          }
+        },
+        {
+          id: "defense-paramilitary",
+          name: "Defense and Paramilitary",
+          description: "Exams for officer roles in Army, Navy, Air Force, and paramilitary forces. Require 12th pass for NDA, Bachelor’s for CDS/CAPF.",
+          careerOptions: [
+            "Army Officer",
+            "Navy Officer",
+            "Air Force Pilot",
+            "Paramilitary Officer"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "UPSC CDS, UPSC NDA, AFCAT, CAPF AC",
+              duration: "1-2 days",
+              institutions: [
+                "UPSC",
+                "Indian Air Force"
+              ]
+            },
+            postgraduate: {
+              name: "Further Defense Recruitment Exams",
+              duration: "1-2 days",
+              institutions: ["UPSC"]
+            },
+            advanced: {
+              name: "Specialized Defense Certifications",
+              duration: "Varies",
+              institutions: ["Ministry of Defence"]
+            }
+          }
+        },
+        {
+          id: "teaching-research",
+          name: "Teaching and Research",
+          description: "Exams for teaching positions and research fellowships in schools and universities. Require Master’s for UGC NET, Bachelor’s/B.Ed for CTET.",
+          careerOptions: [
+            "Professor",
+            "School Teacher",
+            "Researcher",
+            "Academic Advisor"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "UGC NET, CTET, NTSE, KVPY",
+              duration: "1 day",
+              institutions: [
+                "National Testing Agency (UGC NET, CTET)",
+                "NCERT (NTSE)",
+                "IISc Bangalore (KVPY)"
+              ]
+            },
+            postgraduate: {
+              name: "Further Teaching/Research Exams",
+              duration: "1 day",
+              institutions: ["NTA", "NCERT"]
+            },
+            advanced: {
+              name: "Research Fellowships / Certifications",
+              duration: "Varies",
+              institutions: ["UGC", "CSIR"]
+            }
+          }
+        },
+        {
+          id: "design-architecture",
+          name: "Design and Architecture",
+          description: "Exams for architecture and design programs. Require 12th pass with Mathematics for NATA, 12th pass for NIFT/NID.",
+          careerOptions: [
+            "Architect",
+            "Fashion Designer",
+            "Product Designer",
+            "Interior Designer"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "NATA, NIFT, NID DAT",
+              duration: "1 day",
+              institutions: [
+                "Council of Architecture (NATA)",
+                "National Institute of Fashion Technology (NIFT)",
+                "National Institute of Design (NID)"
+              ]
+            },
+            postgraduate: {
+              name: "Further Design/Architecture Exams",
+              duration: "1 day",
+              institutions: ["NIFT", "NID"]
+            },
+            advanced: {
+              name: "Specialized Design Certifications",
+              duration: "Varies",
+              institutions: ["NIFT", "NID"]
+            }
+          }
+        },
+        {
+          id: "professional-scholarship-exams",
+          name: "Professional and Scholarship Exams",
+          description: "Exams for professional qualifications (e.g., CA) and scholarships. Eligibility varies from 8th pass (NMMSS) to Bachelor’s (CA).",
+          careerOptions: [
+            "Chartered Accountant",
+            "Hotel Manager",
+            "Film Director",
+            "Scholar"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "CA Foundation/Intermediate/Final, CUET UG/PG, NCHM JEE, FTII JET, Olympiads, NMMSS",
+              duration: "1 day to multiple stages",
+              institutions: [
+                "Institute of Chartered Accountants of India (ICAI)",
+                "National Testing Agency (CUET)",
+                "NCHM (NCHM JEE)",
+                "Film and Television Institute of India (FTII)",
+                "Various Boards (Olympiads)",
+                "Ministry of Education (NMMSS)"
+              ]
+            },
+            postgraduate: {
+              name: "Further Professional Exams",
+              duration: "1 day to multiple stages",
+              institutions: ["ICAI", "NTA"]
+            },
+            advanced: {
+              name: "Advanced Professional Certifications",
+              duration: "Varies",
+              institutions: ["ICAI", "Various Boards"]
+            }
+          }
+        },
+        {
+          id: "international-language-exams",
+          name: "International and Language Proficiency Exams",
+          description: "Exams for study abroad and English proficiency. No specific eligibility for TOEFL/IELTS; Bachelor’s for GRE.",
+          careerOptions: [
+            "International Student",
+            "Academic Researcher",
+            "Professional Abroad"
+          ],
+          educationPath: {
+            undergraduate: {
+              name: "SAT, GRE, TOEFL, IELTS",
+              duration: "1 day",
+              institutions: [
+                "College Board (SAT)",
+                "ETS (GRE, TOEFL)",
+                "British Council/IDP (IELTS)"
+              ]
+            },
+            postgraduate: {
+              name: "Further International Exams",
+              duration: "1 day",
+              institutions: ["ETS", "College Board"]
+            },
+            advanced: {
+              name: "Specialized Language Certifications",
+              duration: "Varies",
+              institutions: ["ETS", "British Council"]
+            }
+          }
+        }
+      ]
     }
   ]
 };

@@ -1083,6 +1083,46 @@ footer {
       }
     }
   }
+
+  .career-options-section {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.09);
+
+    h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      color: var(--heading-color);
+    }
+
+    p {
+      margin-bottom: 1.8rem;
+      color: var(--text-secondary);
+      font-size: 1.3rem;
+      line-height: 1.8;
+    }
+
+    .career-list-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      list-style-type: none;
+      
+      li {
+        background-color: var(--hover-color);
+        padding: 1.2rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: 1.2rem;
+        border-left: 5px solid var(--accent-secondary);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07);
+        margin-bottom: 0;
+      }
+    }
+  }
 }
 
 // Education Level Detail
@@ -1222,6 +1262,54 @@ footer {
           }
         }
       }
+    }
+  }
+}
+
+// Add this after the .subdomain-detail styles
+
+.combined-detail {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  .subdomain-detail {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--divider-color);
+    margin-bottom: 2rem;
+  }
+  
+  .education-levels-section {
+    padding: 0 2rem;
+  }
+  
+  .education-level-list {
+    .level-header {
+      margin-bottom: 2rem;
+    }
+    
+    .section-title {
+      color: var(--primary-color);
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .section-description {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      color: #444;
+    }
+  }
+  
+  // Add responsive adjustments
+  @media (max-width: 900px) {
+    flex-direction: column;
+    
+    .subdomain-detail,
+    .education-levels-section {
+      width: 100%;
+      padding: 1.5rem;
     }
   }
 } 

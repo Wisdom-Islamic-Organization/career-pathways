@@ -8,19 +8,14 @@ const MindMapView: React.FC = () => {
   const { selectedDomain, selectedSubdomain, selectedEducationLevel, selectEducationLevel } = useCareer();
   const [showDetail, setShowDetail] = useState(false);
 
-  // Show detail panel when a subdomain is selected
+  // Show detail panel when education level changes or when subdomain is selected
   useEffect(() => {
-    if (selectedSubdomain) {
+    if (selectedSubdomain || selectedEducationLevel) {
       setShowDetail(true);
+    } else {
+      setShowDetail(false);
     }
-  }, [selectedSubdomain]);
-
-  // Reset the detail panel when education level changes
-  useEffect(() => {
-    if (selectedEducationLevel) {
-      setShowDetail(true);
-    }
-  }, [selectedEducationLevel]);
+  }, [selectedSubdomain, selectedEducationLevel]);
 
   const toggleDetail = () => {
     setShowDetail(!showDetail);
@@ -34,16 +29,21 @@ const MindMapView: React.FC = () => {
   };
 
   const renderDetailContent = () => {
-    if (selectedEducationLevel && selectedEducationLevel.type !== 'undergraduate') {
-      // Show education level details for postgraduate and advanced levels
+    if (selectedEducationLevel) {
+      // Show education level details
       return <EducationLevelDetail level={selectedEducationLevel} />;
-    } else if (selectedEducationLevel && selectedEducationLevel.type === 'undergraduate') {
-      // For undergraduate, just show the next steps without detail modal
-      return <EducationLevelList onSelectLevel={selectEducationLevel} />;
-    } else {
-      // Show education level selection when no level is selected
-      return <EducationLevelList onSelectLevel={selectEducationLevel} />;
+    } else if (selectedSubdomain) {
+      // For subdomain, show full SubdomainDetail with career paths
+      return (
+        <div className="combined-detail">
+          <div className="education-levels-section">
+            <EducationLevelList onSelectLevel={selectEducationLevel} />
+          </div>
+        </div>
+      );
     }
+    
+    return null;
   };
 
   return (
@@ -59,7 +59,7 @@ const MindMapView: React.FC = () => {
       
       <FullScreenMindMap onNodeClick={toggleDetail} />
       
-      {selectedSubdomain && showDetail && (
+      {showDetail && (
         <div className="detail-overlay" onClick={handleCloseDetail}>
           <div className="detail-container wide-container" onClick={(e) => e.stopPropagation()}>
             <button className="close-button" onClick={handleCloseDetail}>×</button>

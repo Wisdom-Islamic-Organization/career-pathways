@@ -3,17 +3,19 @@ import { useCareer } from '../context/useCareer';
 import Breadcrumb from './Breadcrumb';
 
 const Header: React.FC = () => {
-  const { selectedDomain, selectedSubdomain, selectDomain, selectSubdomain } = useCareer();
+  const { selectedDomain, selectedSubdomain, selectDomain, selectSubdomain, selectedEducationLevel, selectEducationLevel } = useCareer();
 
   const handleGoBack = () => {
-    if (selectedSubdomain) {
+    if (selectedEducationLevel) {
+      selectEducationLevel(null);
+    } else if (selectedSubdomain) {
       selectSubdomain(null);
     } else if (selectedDomain) {
       selectDomain(null);
     }
   };
 
-  const showBackButton = selectedDomain || selectedSubdomain;
+  const showBackButton = selectedDomain || selectedSubdomain || selectedEducationLevel;
 
   return (
     <header>
