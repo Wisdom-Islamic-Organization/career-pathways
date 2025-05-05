@@ -125,13 +125,13 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       };
     }
 
-    // Calculate layout
-    const diameter = Math.min(containerWidth, containerHeight) * 0.85; // Slightly larger for better spacing
+    // Calculate layout - increase diameter for more space
+    const diameter = Math.min(containerWidth, containerHeight) * 0.9; // Larger for better spacing
     const radius = diameter / 2;
     
-    // Use a radial layout for domains
+    // Use a radial layout for domains with more space
     const tree = d3.cluster<NodeData>()
-      .size([360, radius - 170]); // Reduce radius for better spacing
+      .size([360, radius - 100]); // Increase the radius by reducing subtraction amount
     
     // Convert the data to a d3 hierarchy
     const root = d3.hierarchy<NodeData>(hierarchyData);
@@ -155,15 +155,15 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       .attr("offset", "100%")
       .attr("stop-color", "#d8d8d8");
     
-    // Draw links between nodes with straight lines
+    // Draw links between nodes with thicker lines
     g.selectAll(".link")
       .data(rootWithLayout.links())
       .enter()
       .append("path")
       .attr("class", "link")
       .attr("stroke", "#c5c5c5")
-      .attr("stroke-width", 1.2)
-      .attr("opacity", 0.5)
+      .attr("stroke-width", 2) // Thicker lines
+      .attr("opacity", 0.7) // More visible
       .attr("d", (d) => {
         // Get source and target coordinates
         const sx = Math.cos((d.source.x! - 90) * (Math.PI / 180)) * d.source.y!;
@@ -223,7 +223,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       // Add a larger invisible circle for easier clicking
       node.append("circle")
         .attr("class", "click-area")
-        .attr("r", d.depth === 0 ? 50 : d.depth === 1 ? 44 : 34)
+        .attr("r", 90) // Increased for easier clicking
         .attr("fill", "transparent")
         .style("cursor", "pointer")
         .on("click", (event) => {
@@ -237,117 +237,104 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
           }
         });
       
-      // Add the visible circle - slightly smaller for cleaner look
+      // Add the visible circle - larger and with border
       node.append("circle")
-        .attr("r", d.depth === 0 ? 40 : d.depth === 1 ? 34 : 26)
+        .attr("r", 85) // Increased circle sizes
+        .attr("fill", "white")
+        .attr("stroke", "#333")
+        .attr("stroke-width", 1.5)
         .attr("pointer-events", "none");
       
-      // Add a simpler text label
-      const text = node.append("g")
+      // Text handling - improved to show more text
+      const textGroup = node.append("g")
         .attr("class", "node-text")
         .attr("pointer-events", "none");
       
-      // Add background for text - simpler, cleaner style
-      const bg = text.append("rect")
-        .attr("fill", "white")
-        .attr("opacity", 0.98)
-        .attr("rx", 8)
-        .attr("ry", 8)
-        .attr("x", -70)
-        .attr("y", d.depth === 0 ? 46 : d.depth === 1 ? 40 : 32)
-        .attr("width", 140)
-        .attr("height", 30);
-      
-      // Add text - cleaner font
-      const textElement = text.append("text")
+      // Add the text with line wrapping
+      const textElement = textGroup.append("text")
         .attr("text-anchor", "middle")
-        .attr("y", d.depth === 0 ? 66 : d.depth === 1 ? 60 : 50)
-        .attr("font-size", d.depth === 0 ? 17 : d.depth === 1 ? 16 : 15)
-        .attr("font-weight", d.depth === 0 ? 600 : 500)
-        .attr("fill", "#202124");
+        .attr("font-size", d.depth === 0 ? "22px" : d.depth === 1 ? "20px" : "18px")
+        .attr("font-weight", d.depth === 0 ? "bold" : d.depth === 1 ? "semi-bold" : "normal")
+        .attr("fill", "#333");
       
-      // Handle text wrapping for cleaner layout
-      let name = d.data.name;
-      if (name.length > 20) {
-        // For long names, truncate with ellipsis for cleaner look
-        name = name.substring(0, 18) + "...";
-        textElement.append("tspan")
-          .attr("x", 0)
-          .text(name);
-      } else if (name.length > 15 && name.includes(" ")) {
-        // For medium names with spaces, wrap at a space
-        const spaceIndex = name.lastIndexOf(" ", 15);
-        const firstLine = name.substring(0, spaceIndex);
-        const secondLine = name.substring(spaceIndex + 1);
+      // Split the text into multiple lines if needed
+      const words = d.data.name.split(/\s+/);
+      let lines: string[] = [];
+      let line = "";
+      
+      words.forEach(word => {
+        const testLine = line.length === 0 ? word : line + " " + word;
+        // Different max chars based on depth
+        const maxChars = d.depth === 0 ? 25 : d.depth === 1 ? 22 : 20;
         
-        textElement.append("tspan")
-          .attr("x", 0)
-          .text(firstLine);
-        
-        textElement.append("tspan")
-          .attr("x", 0)
-          .attr("dy", "1.3em")
-          .text(secondLine);
-          
-        bg.attr("height", 48)
-          .attr("y", (d.depth === 0 ? 46 : d.depth === 1 ? 40 : 32) - 8);
-      } else {
-        // For short names, keep as is
-        textElement.append("tspan")
-          .attr("x", 0)
-          .text(name);
+        if (testLine.length <= maxChars) {
+          line = testLine;
+        } else {
+          lines.push(line);
+          line = word;
+        }
+      });
+      
+      if (line.length > 0) {
+        lines.push(line);
       }
+      
+      // Add each line of text
+      lines.forEach((lineText, i) => {
+        const lineHeight = d.depth === 0 ? 26 : d.depth === 1 ? 24 : 22;
+        const yPos = (i - (lines.length - 1) / 2) * lineHeight;
+        
+        textElement.append("tspan")
+          .attr("x", 0)
+          .attr("y", yPos)
+          .text(lineText);
+      });
     });
     
-    // Add click handling for the background to collapse
-    svg.on("click", () => {
-      if (expandedDomain) {
-        selectDomain(null);
-        setExpandedDomain(null);
-        selectSubdomain(null);
-      }
-    });
-
-    // Handle window resize
-    const handleResize = () => {
-      if (svgRef.current) {
-        const newWidth = svgRef.current.parentElement?.clientWidth || window.innerWidth;
-        const newHeight = svgRef.current.parentElement?.clientHeight || window.innerHeight;
-        
-        svg
-          .attr('width', newWidth)
-          .attr('height', newHeight);
-          
-        g.attr("transform", `translate(${newWidth / 2 + translate.x},${newHeight / 2 + translate.y}) scale(${scale})`);
-      }
-    };
-
+    // Add event listeners for drag functionality for panning
+    let dragStartX = 0;
+    let dragStartY = 0;
+    
+    svg.call(
+      d3.drag<SVGSVGElement, unknown>()
+        .on("start", (event) => {
+          dragStartX = event.x - translate.x;
+          dragStartY = event.y - translate.y;
+        })
+        .on("drag", (event) => {
+          setTranslate({
+            x: event.x - dragStartX,
+            y: event.y - dragStartY
+          });
+        })
+    );
+    
+  }, [domains, selectedDomain, selectedSubdomain, expandedDomain, scale, translate, handleDomainClick, handleSubdomainClick]);
+  
+  const handleResize = () => {
+    // Force re-render on resize
+    setScale(scale);
+  };
+  
+  useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-
-  }, [domains, expandedDomain, selectedDomain, selectedSubdomain, scale, translate, handleDomainClick, handleSubdomainClick, selectDomain, selectSubdomain]);
-
+  }, []);
+  
   return (
-    <div className="mindmap-view" onWheel={handleWheel}>
-      <svg ref={svgRef}></svg>
-      <MindMapControls 
+    <div
+      className="fullscreen-mindmap"
+      style={{ width: '100%', height: '100vh', overflow: 'hidden', position: 'relative' }}
+      onWheel={handleWheel}
+    >
+      <svg ref={svgRef} width="100%" height="100%" />
+      <MindMapControls
         onZoomIn={handleZoomIn}
         onZoomOut={handleZoomOut}
         onReset={handleReset}
       />
-      {selectedSubdomain && (
-        <div className="node-tooltip">
-          <div className="tooltip-content">
-            <strong>{selectedSubdomain.name}</strong>
-            <p>{selectedSubdomain.description.substring(0, 100)}...</p>
-            <button onClick={onNodeClick} className="view-details-btn">
-              View Details
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
