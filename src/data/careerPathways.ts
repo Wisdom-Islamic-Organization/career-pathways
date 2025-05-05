@@ -332,11 +332,11 @@ export const careerPathwaysData = {
         }
       ]
     },
-   {
+    {
       id: "engineering-technology",
       icon: "🔧",
       name: "Engineering & Technology",
-      description: "Explore careers in engineering and technology fields that drive innovation through machines, software, infrastructure, and emerging technologies.",
+      description: "Curious about how things work? Good at Math & Science? Love solving problems & building things? Interested in innovation, machines, coding, or design? You are an engineer inside!",
       subdomains: [
         {
           id: "mechanical",
@@ -776,8 +776,35 @@ export const careerPathwaysData = {
       id: "medicine",
       icon: "🏥",
       name: "Medicine",
-      description: "Explore careers in healthcare and medical fields that focus on human health and wellbeing.",
+      description: "- Fascinated by the human body and health? Strong in Biology and Chemistry? Passionate about helping people and caring for others? Interested in healing, diagnosis, treatment, or healthcare technology? Have the patience and dedication required for long-term study and practice? Then a career in the Medical Field is for YOU!",
       subdomains: [
+        {
+          id: "allied_health_diploma",
+          "name": "Diploma courses after Class 10th ",
+          "description": "Short-term diploma and certificate courses in healthcare fields that prepare students for support roles in medical services, diagnostics, and emergency care.",
+          "careerOptions": [
+            "Nursing Assistant",
+            "Medical Laboratory Technician",
+            "Radiology Technician",
+            "Operation Theatre Assistant",
+            "Optometry Assistant",
+            "Dental Hygienist",
+            "Emergency Medical Technician",
+            "ECG/X-ray Technician"
+          ],
+          "educationPath": {
+            "afterClass10": {
+              "name": "Diploma/Certificate in Allied Health Sciences",
+              "duration": "1-3 years",
+              "institutions": [
+                "Christian Medical College, Vellore",
+                "Tata Memorial Hospital, Mumbai",
+                "Amrita Institute of Medical Sciences, Kochi",
+                "St. John's Medical College, Bangalore"
+              ]
+            }
+          }
+        },
         {
           id: "mbbs",
           name: "MBBS",
@@ -796,7 +823,8 @@ export const careerPathwaysData = {
                 "AIIMS New Delhi",
                 "CMC Vellore",
                 "JIPMER Puducherry",
-                "Maulana Azad Medical College, Delhi"
+                "Maulana Azad Medical College, Delhi",
+                "Government Medical College, (Thiruvananthapuram, Kottayam, Kozhikode)"
               ]
             },
             postgraduate: {
@@ -1286,10 +1314,44 @@ export const careerPathwaysData = {
       ]
     },
     {
+      "id": "intl_licensing_paths",
+      "name": "International Licensing Exams (USMLE, PLAB, AMC)",
+      "description": "Pathways for Indian MBBS graduates to practice medicine in the USA, UK, and Australia through internationally recognized licensing exams like USMLE, PLAB, and AMC.",
+      "careerOptions": [
+        "Licensed Medical Practitioner (USA/UK/Australia)",
+        "Clinical Researcher",
+        "Hospital Resident or Fellow",
+        "Public Health Specialist",
+        "Medical Consultant in Global Health"
+      ],
+      "educationPath": {
+        "undergraduate": {
+          "name": "MBBS (India or Abroad)",
+          "duration": "5.5 years",
+          "institutions": [
+            "AIIMS New Delhi",
+            "JIPMER Puducherry",
+            "CMC Vellore",
+            "Tbilisi State Medical University",
+            "AMA School of Medicine, Philippines"
+          ]
+        },
+        "postgraduate": {
+          "name": "Residency / Fellowship via Licensing Exams",
+          "duration": "2-6 years",
+          "institutions": [
+            "USMLE Pathway - USA: Step 1, Step 2 CK, Step 3 → Residency via NRMP",
+            "PLAB Pathway - UK: PLAB 1 & PLAB 2 → GMC Registration → Foundation Training",
+            "AMC Pathway - Australia: AMC MCQ + Clinical Exam → Internship → General Registration"
+          ]
+        }
+      }
+    },
+    {
       id: "commerce-management",
       icon: "💰",
       name: "Commerce and Management",
-      description: "Courses in trade, finance, business, economics, and management.",
+      description: "Commerce is the study of trade, finance, business, and economics. It equips students with knowledge about how the economy works, how businesses run, and how money flows in the real world. If you're interested in numbers, markets, law, or entrepreneurship—this is your stream! ",
       subdomains: [
         {
           id: "numbers-finance",
@@ -1384,7 +1446,7 @@ export const careerPathwaysData = {
         {
           id: "law",
           name: "Law",
-          description: "Courses focusing on legal systems and corporate compliance within commerce.",
+          description: "Analytical Thinking, Integrity, Attention to Detail, Persuasive Communication, Emotional Intelligence, Sounds you? You can be a lawyer!",
           careerOptions: [
             "Corporate Lawyer",
             "Legal Consultant",
@@ -1394,14 +1456,29 @@ export const careerPathwaysData = {
           ],
           educationPath: {
             undergraduate: {
-              name: "B.Com + LLB / BBA + LLB",
-              duration: "5 years",
+              name: "B.Com + LLB / BBA + LLB / LL.B (3-Year Law Program for Graduates)",
+              duration: "3-5 years",
               institutions: [
                 "NLU Delhi",
                 "Symbiosis Law School, Pune",
                 "Christ University, Bangalore",
                 "Amity University, Noida",
-                "NLU Bangalore"
+                "NLU Bangalore",
+                "NUALS Kochi",
+                "Government Law College, Ernakulam",
+                "Government Law College, Thiruvananthapuram",
+                "Government Law College, Kozhikode",
+                "Government Law College, Thrissur",
+                "Faculty of Law, University of Delhi (DU)",
+                "Faculty of Law, Banaras Hindu University (BHU)",
+                "Government Law College, Mumbai",
+                "Symbiosis Law School, Pune",
+                "ILS Law College, Pune",
+                "University of Mumbai, Dept. of Law",
+                "Dr. Ambedkar Government Law College, Chennai",
+                "Punjab University, Chandigarh",
+                "Kerala Law Academy Law College, Thiruvananthapuram",
+                "School of Indian Legal Thought, Kottayam (MG University)"
               ]
             },
             postgraduate: {
@@ -1409,6 +1486,11 @@ export const careerPathwaysData = {
               duration: "1-2 years",
               institutions: [
                 "NLU Delhi",
+                "NUALS Kochi",
+                "Government law colleges, Calicut, trivandrum",
+                "Indian Law Institute (ILI), Delhi",
+                "Faculty of Law, University of Delhi (DU)",
+                "National Academy of Legal Studies and Research (NALSAR), Hyderabad",
                 "JNU Delhi",
                 "Symbiosis Law School, Pune",
                 "Christ University, Bangalore"
@@ -1419,6 +1501,7 @@ export const careerPathwaysData = {
               duration: "3-5 years",
               institutions: [
                 "NLU Delhi",
+                "NUALS Kochi",
                 "JNU Delhi",
                 "NLU Bangalore",
                 "Symbiosis Law School, Pune"
@@ -1439,14 +1522,20 @@ export const careerPathwaysData = {
           ],
           educationPath: {
             undergraduate: {
-              name: "B.Com (Banking) / BBA (Banking & Insurance)",
-              duration: "3 years",
+              name: "B.Com (Banking) / BBA (Banking & Insurance) / Integrated Management Programs (BBA+MBA) / Bachelor of Management Studies (BMS)",
+              duration: "3-5 years",
               institutions: [
                 "Shri Ram College of Commerce, Delhi",
                 "Christ University, Bangalore",
                 "Loyola College, Chennai",
                 "St. Xavier’s College, Mumbai",
-                "Amity University, Noida"
+                "Amity University, Noida",
+                "IIM Indore",
+                "IIM Rohtak",
+                "IIM Ranchi",
+                "IIM Jammu",
+                "IIM Bodh Gaya",
+                "IIM Kozhikode"
               ]
             },
             postgraduate: {
@@ -1524,11 +1613,13 @@ export const careerPathwaysData = {
           name: "Emerging Careers",
           description: "Courses supporting innovative and trending career paths in commerce and management.",
           careerOptions: [
-            "Hospitality Manager",
+            "FinTech Specialist ",
             "Media Manager",
             "Economist",
-            "Event Manager",
-            "Advertising Specialist"
+            "Sustainability Consultant (ESG) ",
+            "Advertising Specialist",
+            "Forensic Accountant",
+            "Startup Consultant"
           ],
           educationPath: {
             undergraduate: {
@@ -1544,7 +1635,7 @@ export const careerPathwaysData = {
               ]
             },
             postgraduate: {
-              name: "MBA (Hospitality Management, Media & Advertising, International Business) / M.A. Economics",
+              name: "MBA (Hospitality Management, Media & Advertising, International Business) / M.A. Economics / M.Com / MBA / M.Sc / PGDM in Forensic Accounting, Fraud Detection, Financial Forensics / PGDM in Sustainability, ESG, Environmental Management, CSR / M.Tech in FinTech, Data Science, Blockchain, Digital Finance /  M.A. in Entrepreneurship, Startup Consulting, Innovation Management",
               duration: "2 years",
               institutions: [
                 "IIM Lucknow",
@@ -1555,7 +1646,7 @@ export const careerPathwaysData = {
               ]
             },
             advanced: {
-              name: "Ph.D. in Economics / Management",
+              name: "Ph.D. in Economics / Management | PhD in Forensic Accounting / Financial Crime / Accounting & Law | PhD in Sustainability, ESG, Environmental Economics, CSR",
               duration: "3-5 years",
               institutions: [
                 "IIM Calcutta",
@@ -1563,10 +1654,9 @@ export const careerPathwaysData = {
                 "Delhi School of Economics",
                 "JNU Delhi"
               ]
-            }
+            },
           }
-        }
-      ]
+        }]
     },
     {
       id: "social-science-humanities",
@@ -2108,7 +2198,7 @@ export const careerPathwaysData = {
               name: "Advanced Diplomas in Digital Marketing / Industry Experience",
               duration: "6-12 months",
 
-institutions: [
+              institutions: [
                 "NIELIT Delhi",
                 "One Team Solutions (Kerala)"
               ]
@@ -2224,7 +2314,7 @@ institutions: [
               duration: "1-2 years",
               institutions: [
 
-"NIELIT Delhi",
+                "NIELIT Delhi",
                 "Brototype (Kerala)"
               ]
             }
@@ -2339,7 +2429,7 @@ institutions: [
                 "Sir C.V. Raman ITI (Delhi)"
               ]
 
-},
+            },
             advanced: {
               name: "Advanced ITI Diplomas / Industry Experience",
               duration: "1-2 years",
@@ -2838,11 +2928,11 @@ institutions: [
       ]
     },
     {
-      "id": "education",
-      "icon": "🏫",
-      "name": "Education",
-      "description": "Explore careers in teaching and educational training that shape future generations.",
-      "subdomains": [
+      id: "education",
+      icon: "🏫",
+      name: "Education",
+      description: "Explore careers in teaching and educational training that shape future generations.",
+      subdomains: [
         {
           "id": "teacher-education",
           "name": "Teacher Education",
