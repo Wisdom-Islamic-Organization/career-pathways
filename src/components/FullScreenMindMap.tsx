@@ -343,7 +343,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
   return (
     <div
       className="fullscreen-mindmap"
-      style={{ width: '100%', height: '100vh', overflow: 'hidden', position: 'relative' }}
+      style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}
       onWheel={handleWheel}
     >
       <svg ref={svgRef} width="100%" height="100%" />
