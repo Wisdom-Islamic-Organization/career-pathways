@@ -1315,37 +1315,46 @@ export const careerPathwaysData = {
     },
     {
       "id": "intl_licensing_paths",
+      "icon": "🌏",
       "name": "International Licensing Exams (USMLE, PLAB, AMC)",
       "description": "Pathways for Indian MBBS graduates to practice medicine in the USA, UK, and Australia through internationally recognized licensing exams like USMLE, PLAB, and AMC.",
-      "careerOptions": [
-        "Licensed Medical Practitioner (USA/UK/Australia)",
-        "Clinical Researcher",
-        "Hospital Resident or Fellow",
-        "Public Health Specialist",
-        "Medical Consultant in Global Health"
-      ],
-      "educationPath": {
-        "undergraduate": {
-          "name": "MBBS (India or Abroad)",
-          "duration": "5.5 years",
-          "institutions": [
-            "AIIMS New Delhi",
-            "JIPMER Puducherry",
-            "CMC Vellore",
-            "Tbilisi State Medical University",
-            "AMA School of Medicine, Philippines"
-          ]
-        },
-        "postgraduate": {
-          "name": "Residency / Fellowship via Licensing Exams",
-          "duration": "2-6 years",
-          "institutions": [
-            "USMLE Pathway - USA: Step 1, Step 2 CK, Step 3 → Residency via NRMP",
-            "PLAB Pathway - UK: PLAB 1 & PLAB 2 → GMC Registration → Foundation Training",
-            "AMC Pathway - Australia: AMC MCQ + Clinical Exam → Internship → General Registration"
-          ]
+      "subdomains": [
+        {
+          "id": "intl_licensing_paths",
+          "name": "International Licensing Exams (USMLE, PLAB, AMC)",
+          "description": "Pathways for Indian MBBS graduates to practice medicine in the USA, UK, and Australia through internationally recognized licensing exams like USMLE, PLAB, and AMC.",
+          "careerOptions": [
+            "Licensed Medical Practitioner (USA/UK/Australia)",
+            "Clinical Researcher",
+            "Hospital Resident or Fellow",
+            "Public Health Specialist",
+            "Medical Consultant in Global Health"
+          ],
+          "educationPath": {
+            "undergraduate": {
+              "name": "MBBS (India or Abroad)",
+              "duration": "5.5 years",
+              "institutions": [
+                "AIIMS New Delhi",
+                "JIPMER Puducherry",
+                "CMC Vellore",
+                "Tbilisi State Medical University",
+                "AMA School of Medicine, Philippines"
+              ]
+            },
+            "postgraduate": {
+              "name": "Residency / Fellowship via Licensing Exams",
+              "duration": "2-6 years",
+              "institutions": [
+                "USMLE Pathway - USA: Step 1, Step 2 CK, Step 3 → Residency via NRMP",
+                "PLAB Pathway - UK: PLAB 1 & PLAB 2 → GMC Registration → Foundation Training",
+                "AMC Pathway - Australia: AMC MCQ + Clinical Exam → Internship → General Registration"
+              ]
+            },
+            "advanced": {}
+          }
         }
-      }
+      ]
     },
     {
       id: "commerce-management",

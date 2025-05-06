@@ -22,6 +22,7 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
   const [expandedDomain, setExpandedDomain] = useState<string | null>(null);
   const [scale, setScale] = useState<number>(1);
   const [translate, setTranslate] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
+  const [dimensions, setDimensions] = useState<{ width: number, height: number }>({ width: 0, height: 0 });
 
   // Simplified handler for domains - just expands the clicked domain
   const handleDomainClick = useCallback((domainId: string) => {
@@ -76,6 +77,23 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
     }
   };
 
+  // Calculate responsive sizes based on container dimensions
+  const calculateResponsiveSizes = useCallback((width: number, height: number) => {
+    const minDimension = Math.min(width, height);
+    
+    return {
+      diameter: minDimension * 0.9,
+      circleRadius: Math.max(30, minDimension * 0.06),
+      clickRadius: Math.max(35, minDimension * 0.07),
+      fontSize: {
+        icon: minDimension * 0.02 + 'px',
+        text: minDimension * 0.012 + 'px'
+      },
+      lineHeight: Math.max(20, minDimension * 0.04),
+      strokeWidth: Math.max(1, minDimension * 0.001)
+    };
+  }, []);
+
   useEffect(() => {
     if (!svgRef.current || domains.length === 0) return;
 
@@ -86,6 +104,12 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
     // Get the dimensions of the container
     const containerWidth = svgRef.current.parentElement?.clientWidth || window.innerWidth;
     const containerHeight = svgRef.current.parentElement?.clientHeight || window.innerHeight;
+    
+    // Update dimensions state
+    setDimensions({ width: containerWidth, height: containerHeight });
+    
+    // Calculate responsive sizes
+    const responsiveSizes = calculateResponsiveSizes(containerWidth, containerHeight);
     
     svg
       .attr('width', containerWidth)
@@ -128,13 +152,13 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       };
     }
 
-    // Calculate layout - increase diameter for more space
-    const diameter = Math.min(containerWidth, containerHeight) * 0.9; // Larger for better spacing
+    // Use responsive diameter
+    const diameter = responsiveSizes.diameter;
     const radius = diameter / 2;
     
     // Use a radial layout for domains with more space
     const tree = d3.cluster<NodeData>()
-      .size([360, radius - 100]); // Increase the radius by reducing subtraction amount
+      .size([360, radius - (containerWidth * 0.07)]); // Responsive spacing
     
     // Convert the data to a d3 hierarchy
     const root = d3.hierarchy<NodeData>(hierarchyData);
@@ -158,15 +182,15 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       .attr("offset", "100%")
       .attr("stop-color", "#d8d8d8");
     
-    // Draw links between nodes with thicker lines
+    // Draw links between nodes with responsive stroke width
     g.selectAll(".link")
       .data(rootWithLayout.links())
       .enter()
       .append("path")
       .attr("class", "link")
       .attr("stroke", "#c5c5c5")
-      .attr("stroke-width", 2) // Thicker lines
-      .attr("opacity", 0.7) // More visible
+      .attr("stroke-width", responsiveSizes.strokeWidth)
+      .attr("opacity", 0.7)
       .attr("d", (d) => {
         // Get source and target coordinates
         const sx = Math.cos((d.source.x! - 90) * (Math.PI / 180)) * d.source.y!;
@@ -223,10 +247,10 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
           return `translate(${y * Math.cos(x)},${y * Math.sin(x)})`;
         });
       
-      // Add a larger invisible circle for easier clicking
+      // Add a larger invisible circle for easier clicking with responsive radius
       node.append("circle")
         .attr("class", "click-area")
-        .attr("r", 90) // Increased for easier clicking
+        .attr("r", responsiveSizes.clickRadius)
         .attr("fill", "transparent")
         .style("cursor", "pointer")
         .on("click", (event) => {
@@ -240,27 +264,30 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
           }
         });
       
-      // Add the visible circle - larger and with border
+      // Add the visible circle with responsive radius
       node.append("circle")
-        .attr("r", 85) // Increased circle sizes
+        .attr("r", responsiveSizes.circleRadius)
         .attr("fill", "white")
         .attr("stroke", "#333")
-        .attr("stroke-width", 1.5)
+        .attr("stroke-width", responsiveSizes.strokeWidth)
         .attr("pointer-events", "none");
       
-      // Add icon if available (for root and domain nodes)
+      // Add icon if available with responsive font size
       if (d.data.icon && (d.depth === 0 || d.depth === 1)) {
         node.append("text")
           .attr("class", "icon")
           .attr("text-anchor", "middle")
           .attr("dominant-baseline", "central")
-          .style("font-size", "2rem") // Larger icon for root
-          .attr("y", -20) // Position above the text
+          .attr("text-rendering", "geometricPrecision")
+          .style("font-family", "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif")
+          .style("font-size", responsiveSizes.fontSize.icon)
+          .style("font-weight", "normal")
+          .attr("y", -responsiveSizes.circleRadius * 0.25)
           .text(d.data.icon)
           .attr("pointer-events", "none");
       }
       
-      // Text handling - improved to show more text
+      // Text handling with responsive font size
       const textGroup = node.append("g")
         .attr("class", "node-text")
         .attr("pointer-events", "none");
@@ -268,8 +295,14 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       // Add the text with line wrapping
       const textElement = textGroup.append("text")
         .attr("text-anchor", "middle")
-        .attr("dy", (d.depth === 0 || d.depth === 1) && d.data.icon ? "35px" : "0px") 
+        .attr("dominant-baseline", "central")
+        .attr("text-rendering", "geometricPrecision")
+        .attr("dy", (d.depth === 0 || d.depth === 1) && d.data.icon ? 
+              responsiveSizes.circleRadius * 0.4 + "px" : "0px")
+        .style("font-family", "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif")
         .style("font-weight", "bold")
+        .style("font-size", responsiveSizes.fontSize.text)
+        .style("letter-spacing", "0.2px")
         .attr("fill", "#333");
       
       // Split the text into multiple lines if needed
@@ -277,10 +310,15 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
       const lines: string[] = [];
       let line = "";
       
+      // Calculate max chars based on depth and circle size
+      const maxChars = d.depth === 0 ? 
+                      Math.ceil(responsiveSizes.circleRadius * 0.7) : 
+                      d.depth === 1 ? 
+                      Math.ceil(responsiveSizes.circleRadius * 0.6) : 
+                      Math.ceil(responsiveSizes.circleRadius * 0.5);
+      
       words.forEach(word => {
         const testLine = line.length === 0 ? word : line + " " + word;
-        // Different max chars based on depth
-        const maxChars = d.depth === 0 ? 25 : d.depth === 1 ? 22 : 20;
         
         if (testLine.length <= maxChars) {
           line = testLine;
@@ -294,14 +332,14 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
         lines.push(line);
       }
       
-      // Add each line of text
+      // Add each line of text with responsive line height
       lines.forEach((lineText, i) => {
-        const lineHeight = 50
-        const yPos = (i - (lines.length - 1) / 2) * lineHeight;
+        const yPos = (i - (lines.length - 1) / 2) * responsiveSizes.lineHeight;
         
         textElement.append("tspan")
           .attr("x", 0)
           .attr("y", yPos)
+          .style("alignment-baseline", "middle")
           .text(lineText);
       });
     });
@@ -324,21 +362,30 @@ const FullScreenMindMap: React.FC<FullScreenMindMapProps> = ({ onNodeClick }) =>
         })
     );
     
-  }, [domains, selectedDomain, selectedSubdomain, expandedDomain, scale, translate, handleDomainClick, handleSubdomainClick]);
+  }, [domains, selectedDomain, selectedSubdomain, expandedDomain, scale, translate, handleDomainClick, handleSubdomainClick, calculateResponsiveSizes]);
   
   // Move handleResize inside useEffect to fix the dependency warning
   useEffect(() => {
     // Define the resize handler inside the effect to avoid dependency issues
     const handleResize = () => {
-      // Force re-render on resize
-      setScale(prevScale => prevScale); // This will trigger a re-render without changing the value
+      if (svgRef.current && svgRef.current.parentElement) {
+        const newWidth = svgRef.current.parentElement.clientWidth;
+        const newHeight = svgRef.current.parentElement.clientHeight;
+        
+        // Only update if dimensions have actually changed
+        if (newWidth !== dimensions.width || newHeight !== dimensions.height) {
+          setDimensions({ width: newWidth, height: newHeight });
+          // Force re-render by modifying state
+          setScale(prevScale => prevScale);
+        }
+      }
     };
     
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []); // Empty dependency array since handleResize is defined inside
+  }, [dimensions]); 
   
   return (
     <div
